@@ -1,44 +1,32 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
+<script>
+import AssignmentList from './AssignmentList.vue'
+export default{
+  data(){
+    return{
+      assignments:[
+        {name:'Kill the mocking bird', completed:true},
+        {name:'Grab a chicken', completed:false},
+        {name:'Watch a movie', completed:false},
+        {name:'Enjoy a night out with friends', completed:false}
+      ]
+    }
+  },
+  components:{
+    'assignment-list':AssignmentList
+  },
+  computed:{
+    inProgress(){
+      return this.assignments.filter(a=>a.completed)
+    },
+    completed() {
+      return this.assignments.filter(a => !a.completed)
+    }
   }
-})
+}
+
 </script>
 
 <template>
-  <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
-    </h3>
-  </div>
+  <assignment-list :assignments="inProgress" title="In Progress"></assignment-list>
+  <assignment-list :assignments="completed" title="Completed"></assignment-list>
 </template>
-
-<style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
-}
-</style>
