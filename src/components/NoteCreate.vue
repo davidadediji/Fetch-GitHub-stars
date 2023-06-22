@@ -11,8 +11,7 @@ export default{
             this.$emit('add', this.title, this.description)
             this.title=''
             this.description=''
-        },
-        
+        },   
     }
 }
 </script>
