@@ -2,14 +2,15 @@
 import { onMounted, ref} from 'vue'
 import { useRoute, RouterLink} from 'vue-router';
 import NavBar from '../components/NavBar.vue'
+import {useNoteStore} from "@/store/noteStore";
 
-const note = ref('')
+const note = ref(null)
 const route = useRoute()
+const noteStore = useNoteStore()
 
 onMounted(()=>{
     const id = route.params.id
-    const notes = JSON.parse(localStorage.getItem('notes'));
-    note.value = notes.find((note) => note.id === parseInt(id));
+    note.value = noteStore.notes.find((note) => note.id === Number(id));
 })
 </script>
 
@@ -20,7 +21,7 @@ onMounted(()=>{
          <RouterLink to="/">
             <button class="bg-gray-200 rounded-md px-2 py-1">Back</button></RouterLink>
         
-        <h1 class="text-4xl font-bold">{{ note.title }}</h1>
-        <p class="text-justify">{{ note.description }}</p>
+        <h1 class="text-4xl font-bold">{{ note?.title }}</h1>
+        <p class="text-justify">{{ note?.description }}</p>
     </section>
 </template>

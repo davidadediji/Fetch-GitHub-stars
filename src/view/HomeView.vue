@@ -3,16 +3,17 @@ import NoteCreate from '../components/NoteCreate.vue';
 import { RouterLink } from 'vue-router';
 import NavBar from '../components/NavBar.vue';
 import {useNoteStore} from '../store/noteStore'
-import { ref, onMounted, computed } from 'vue';
+import { ref, computed } from 'vue';
 import DeleteIcon from '../components/svgs/DeleteIcon.vue'
 import GoTo from '../components/svgs/GoTo.vue'
 import DeleteModal from '../components/modals/DeleteModal.vue'
 
 const noteStore = useNoteStore()
-const displayModal = ref(false);
 const selectedNote = ref(null)
 
 const notes = computed(() => noteStore.notes)
+
+const displayModal = computed(() => noteStore.isDeleteModal)
 
 // const createNote = () => {
    
@@ -22,21 +23,14 @@ const notes = computed(() => noteStore.notes)
 //     localStorage.setItem('notes', JSON.stringify(notes.value));
 // };
 
-onMounted(() => {
-    noteStore.getNotes();
-});
-
-const handleDisplayModal = (selectedNote)=>{
-    console.log(selectedNote)
-    selectedNote.value = selectedNote
-    console.log(selectedNote.value)
-    displayModal.value = !displayModal.value
+const handleDisplayModal = (note)=>{
+  selectedNote.value = note
+  noteStore.isDeleteModal = true
 }
 
 </script>
 
 <template>
-    <delete-modal :note="selectedNote" v-show="displayModal"></delete-modal>
     <main class="flex flex-col gap-12">
         <nav-bar></nav-bar>
         <section>
@@ -62,5 +56,6 @@ const handleDisplayModal = (selectedNote)=>{
             </ul>
         </section>
     </main>
+  <delete-modal :note="selectedNote" v-show="displayModal"></delete-modal>
 </template>
 

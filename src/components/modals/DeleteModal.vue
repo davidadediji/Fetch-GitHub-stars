@@ -1,14 +1,17 @@
 <script setup>
 import {useNoteStore} from '../../store/noteStore'
 const props = defineProps({
-    note:Object
+    note: Object
 })
 
 const noteStore = useNoteStore()
 
 const deleteNote= ()=>{
-    console.log('delete modal',props.note)
     noteStore.deleteNote(props.note.id)
+}
+
+const cancelDelete = () => {
+    noteStore.isDeleteModal = false
 }
 
 

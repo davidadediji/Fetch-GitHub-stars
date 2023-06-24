@@ -1,18 +1,21 @@
 <script setup>
-import {ref, computed} from 'vue'
+import {computed, reactive} from 'vue'
+import {useNoteStore} from "@/store/noteStore";
 
-const title = ref('')
-const description = ref('')
-const emit = defineEmits(['create'])
+const noteStore = useNoteStore()
+
+const noteForm = reactive({
+    title: '',
+    description: '',
+    id: Date.now()
+})
 
 const wordCount = computed(()=>{
-    return description.value.split(' ').filter(word=>word !== '').length
+    return noteForm.description.split(' ').filter(word=>word !== '').length
 })
 
 const add = ()=>{
-    emit('create', title.value, description.value)
-    title.value=''
-    description.value=''
+  noteStore.createNote(noteForm)
 }
 </script>
 
@@ -21,8 +24,8 @@ const add = ()=>{
         <form action="" @submit.prevent="add" method="post">
             <section class="flex flex-col">
                 <label for="title"></label>
-                <input type="text" name="title" id="title" class="text-gray-900 outline-none px-2 py-2 bg-slate-100" placeholder="Title" v-model="title">
-                <textarea name="" id="" cols="30" rows="3" placeholder="Take notes here..." class="px-2 outline-none pt-2 bg-slate-100" v-model="description"></textarea>
+                <input type="text" name="title" id="title" class="text-gray-900 outline-none px-2 py-2 bg-slate-100" placeholder="Title" v-model="noteForm.title">
+                <textarea name="" id="" cols="30" rows="3" placeholder="Take notes here..." class="px-2 outline-none pt-2 bg-slate-100" v-model="noteForm.description"></textarea>
                 <span class=" text-xs text-gray-500 pl-2">{{ wordCount }} words written</span>
             </section>
             <section class="w-full text-right">
