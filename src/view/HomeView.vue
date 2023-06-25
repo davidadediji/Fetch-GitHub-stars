@@ -14,14 +14,6 @@ const selectedNote = ref(null)
 
 const notes = computed(() => noteStore.notes)
 
-// const createNote = () => {
-   
-// };
-
-// const saveToDb = () => {
-//     localStorage.setItem('notes', JSON.stringify(notes.value));
-// };
-
 onMounted(() => {
     noteStore.getNotes();
 });

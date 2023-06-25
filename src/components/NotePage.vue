@@ -15,7 +15,6 @@ onMounted(()=>{
 
 <template>
     <nav-bar></nav-bar>
-   
     <section class="max-w-xl mx-auto flex flex-col gap-12">
          <RouterLink to="/">
             <button class="bg-gray-200 rounded-md px-2 py-1">Back</button></RouterLink>

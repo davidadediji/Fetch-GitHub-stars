@@ -19,12 +19,11 @@ export const useNoteStore = defineStore("notes", {
       this.saveToDb()
     },
     getNotes(){
-       this.notes = JSON.parse(localStorage.getItem('notes'));
+      this.notes = JSON.parse(localStorage.getItem('notes'));
     },
     saveToDb() {
       localStorage.setItem("notes", JSON.stringify(this.notes))
     }
-
     
   }
 })
