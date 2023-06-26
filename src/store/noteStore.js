@@ -1,5 +1,4 @@
 import { defineStore } from "pinia"
-import {} from "vue"
 
 export const useNoteStore = defineStore("notes", {
   state: () => {
@@ -11,22 +10,30 @@ export const useNoteStore = defineStore("notes", {
 
   actions: {
     createNote(payload) {
-      this.notes.push(payload)
-      this.saveToDb()
-      // payload.title = ''
-      // payload.description = ''
-    },
-    deleteNote(id) {
+      const {title, description, id} = payload
 
+      if(title.value !== '' & description.value !== ''){
+        this.notes.push({title:title.value, description:description.value, id:id})
+        this.saveToDb()
+      }
+      title.value = ''
+      description.value = ''
+
+    },
+
+    deleteNote(id) {
       this.notes = this.notes.filter((t) => t.id !== id)
       this.saveToDb()
+      this.isDisplayModal = false
     },
-    getNotes(){
-      this.notes = JSON.parse(localStorage.getItem('notes'));
+
+    getNotes() {
+      this.notes = JSON.parse(localStorage.getItem("notes"))
+        ? JSON.parse(localStorage.getItem("notes"))
+        : []
     },
     saveToDb() {
       localStorage.setItem("notes", JSON.stringify(this.notes))
     }
-
   }
 })

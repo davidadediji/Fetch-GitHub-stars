@@ -9,9 +9,9 @@ import GoTo from '../components/svgs/GoTo.vue'
 import DeleteModal from '../components/modals/DeleteModal.vue'
 
 const noteStore = useNoteStore()
-const displayModal = computed(() => noteStore.isDisplayModal)
 const selectedNote = ref(null)
 
+const displayModal = computed(() => noteStore.isDisplayModal)
 const notes = computed(() => noteStore.notes)
 
 
