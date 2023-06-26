@@ -10,18 +10,23 @@ export const useNoteStore = defineStore("notes", {
 
   actions: {
     createNote(payload) {
-      const {title, description, id} = payload
+      const { title, description, id } = payload
 
-      if(title.value !== '' & description.value !== ''){
-        this.notes.push({title:title.value, description:description.value, id:id})
+      if ((title.value !== "") & (description.value !== "")) {
+        this.notes.push({ title: title.value, description: description.value, id: id })
         this.saveToDb()
       }
-      title.value = ''
-      description.value = ''
-
+      title.value = ""
+      description.value = ""
     },
 
-    updateNote(){},
+    updateNote(notes, { id, title, description }) {
+      const note = notes.find((note) => note.id === id)
+      if (note & (note.title !== "") & (note.description !== "")) {
+        note.title = title
+        note.description = description
+      }
+    },
 
     deleteNote(id) {
       this.notes = this.notes.filter((t) => t.id !== id)

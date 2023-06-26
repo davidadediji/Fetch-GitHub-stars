@@ -21,6 +21,14 @@ onMounted(() => {
     const id = route.params.id
     note.value = noteStore.notes.find((note) => note.id === Number(id));
 })
+
+const editNote = ()=>{
+    const id = route.params.id
+    const {title, description} = note.value
+    noteStore.updateNote(noteStore.notes, {id, title, description})
+}
+
+
 </script>
 
 <template>
@@ -31,7 +39,7 @@ onMounted(() => {
     </div>
 
     <section v-if="isEditing" class="max-w-xl mx-auto flex flex-col gap-3 m-auto border border-b-4 border-gray-700 rounded-lg px-2 mt-4">
-        <h1 class="text-4xl font-bold" @click="handleForm">{{ note.title }}</h1>
+        <h1 class="text-4xl font-bold py-2" @click="handleForm">{{ note.title }}</h1>
         <p class="text-justify" @click="handleForm">{{ note.description }}</p>
     </section>
 
@@ -47,7 +55,7 @@ onMounted(() => {
                 </section>
                 <section class="w-full text-right">
                     <button type="submit"
-                        class=" text-sm px-4 py-2 text-right mt-3 border border-gray-400 hover:bg-gray-400 hover:text-white rounded text-gray-600">Edit</button>
+                        class=" text-sm px-4 py-2 text-right mt-3 border border-gray-400 hover:bg-gray-400 hover:text-white rounded text-gray-600" @click="editNote">Edit</button>
                 </section>
             </form>
     </section>
