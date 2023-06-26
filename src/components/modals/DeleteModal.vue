@@ -7,8 +7,12 @@ const props = defineProps({
 const noteStore = useNoteStore()
 
 const deleteNote= ()=>{
-    console.log('delete modal',props.note)
     noteStore.deleteNote(props.note.id)
+    noteStore.isDisplayModal = false
+}
+
+const cancelDelete = ()=>{
+    noteStore.isDisplayModal = false
 }
 
 

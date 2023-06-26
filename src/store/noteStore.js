@@ -4,7 +4,8 @@ import {} from "vue"
 export const useNoteStore = defineStore("notes", {
   state: () => {
     return {
-      notes: []
+      notes: [],
+      isDisplayModal: false
     }
   },
 
@@ -12,6 +13,8 @@ export const useNoteStore = defineStore("notes", {
     createNote(payload) {
       this.notes.push(payload)
       this.saveToDb()
+      // payload.title = ''
+      // payload.description = ''
     },
     deleteNote(id) {
 
@@ -24,6 +27,6 @@ export const useNoteStore = defineStore("notes", {
     saveToDb() {
       localStorage.setItem("notes", JSON.stringify(this.notes))
     }
-    
+
   }
 })
