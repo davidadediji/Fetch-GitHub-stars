@@ -21,6 +21,8 @@ export const useNoteStore = defineStore("notes", {
 
     },
 
+    updateNote(){},
+
     deleteNote(id) {
       this.notes = this.notes.filter((t) => t.id !== id)
       this.saveToDb()
