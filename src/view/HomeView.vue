@@ -34,9 +34,9 @@ const handleDisplayModal = (note)=>{
                 <li class="font-medium text-lg">All Notes</li>
                 <li v-if="notes.length === 0" class=" italic text-xs text-gray-400"> No notes listed</li>
                 <li v-for="note in notes" :key="note.id"
-                    class="border border-green-400 py-2 px-4 rounded-lg flex justify-between text-xs">
+                    class="border border-gray-400 py-2 px-4 rounded-lg flex justify-between text-xs">
                     <router-link :to="`/note/${note.id}`">
-                        <div class=" hover:text-green-500 px-2 py-1 rounded-md flex items-center gap-2">
+                        <div class=" hover:text-gray-500 px-2 py-1 rounded-md flex items-center gap-2">
                             <p>{{ note.title }}</p>
                             <go-to class="w-4"></go-to>
                         </div>
