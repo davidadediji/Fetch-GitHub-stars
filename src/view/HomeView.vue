@@ -3,7 +3,7 @@ import NoteCreate from '../components/NoteCreate.vue';
 import { RouterLink } from 'vue-router';
 import NavBar from '../components/NavBar.vue';
 import {useNoteStore} from '../store/noteStore'
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import DeleteIcon from '../components/svgs/DeleteIcon.vue'
 import GoTo from '../components/svgs/GoTo.vue'
 import DeleteModal from '../components/modals/DeleteModal.vue'
@@ -14,6 +14,9 @@ const selectedNote = ref(null)
 const displayModal = computed(() => noteStore.isDisplayModal)
 const notes = computed(() => noteStore.notes)
 
+onMounted(() => {
+    noteStore.getNotes();
+});
 
 const handleDisplayModal = (note)=>{
     selectedNote.value = note

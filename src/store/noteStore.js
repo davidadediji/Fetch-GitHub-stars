@@ -21,11 +21,7 @@ export const useNoteStore = defineStore("notes", {
     },
 
     updateNote(notes, { id, title, description }) {
-      const note = notes.find((note) => note.id === id)
-      if (note & (note.title !== "") & (note.description !== "")) {
-        note.title = title
-        note.description = description
-      }
+      console.log(notes, {id, title, description})
     },
 
     deleteNote(id) {

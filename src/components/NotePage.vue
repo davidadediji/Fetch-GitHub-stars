@@ -19,6 +19,7 @@ const wordCount = computed(() => {
 
 onMounted(() => {
     const id = route.params.id
+    noteStore.getNotes()
     note.value = noteStore.notes.find((note) => note.id === Number(id));
 })
 
